@@ -11,30 +11,46 @@ import java.util.Scanner;
 
 public class CifraCesar {
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
+        Scanner scan = new Scanner(System.in);
 
-        int deslocamento = scanner.nextInt();
-        scanner.nextLine(); // Consome a quebra de linha após o número
-        String texto = scanner.nextLine();
+        if (!scan.hasNextInt()) {
+            scan.close();
+            return;
+        }
 
-        StringBuilder resultado = new StringBuilder();
+        int deslocamento = scan.nextInt();
 
-        for (int i = 0; i < texto.length(); i++) {
-            char c = texto.charAt(i);
+        String textoOriginal = scan.nextLine();
+        
+        if (textoOriginal.isEmpty() && scan.hasNextLine()) {
+            textoOriginal = scan.nextLine();
+        } else if (textoOriginal.startsWith(" ")) {
+            textoOriginal = textoOriginal.substring(1);
+        }
 
-            if (Character.isLetter(c)) {
-                c = Character.toLowerCase(c);
-                int posOriginal = c - 'a';
-                int posCifrada = (posOriginal + deslocamento) % 26;
-                char cCifrado = (char) ('A' + posCifrada);
-                resultado.append(cCifrado);
-            } else {
-                resultado.append(c);
+        StringBuilder textoCifrado = new StringBuilder();
+
+        for (int i = 0; i < textoOriginal.length(); i++) {
+            char cOriginal = textoOriginal.charAt(i);
+
+            if (cOriginal >= 'a' && cOriginal <= 'z') {
+                char cCifrado = (char) (cOriginal - 'a');
+                cCifrado = (char) ((cCifrado + deslocamento) % 26);
+                cCifrado += 'A';
+                textoCifrado.append(cCifrado);
+            } 
+            else if (cOriginal >= 'A' && cOriginal <= 'Z') {
+                char cCifrado = (char) (cOriginal - 'A');
+                cCifrado = (char) ((cCifrado + deslocamento) % 26);
+                cCifrado += 'A';
+                textoCifrado.append(cCifrado);
+            } 
+            else {
+                textoCifrado.append(cOriginal);
             }
         }
 
-        System.out.println(resultado.toString());
-
-        scanner.close();
+        System.out.println(textoCifrado.toString());
+        scan.close();
     }
 }
