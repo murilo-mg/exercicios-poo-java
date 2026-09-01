@@ -1,0 +1,14 @@
+/*
+ * Macaco
+ * Crie uma classe em Java chamada Macaco que imprima no console a figura de um macaco.
+ */
+
+public class Macaco {
+    public static void main(String[] args) {
+        System.out.println("  *****");
+        System.out.println("(* o o *)");
+        System.out.println(" *  ^  *");
+        System.out.println(" * --- *");
+        System.out.println("  *****");
+    }
+}
