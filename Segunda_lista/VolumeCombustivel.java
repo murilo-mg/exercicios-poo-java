@@ -16,42 +16,42 @@ import java.util.Scanner;
 public class VolumeCombustivel {
 
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        scanner.useLocale(Locale.US);
+        // O try encarrega-se de fechar o scanner automaticamente ao sair do bloco
+        try (Scanner scanner = new Scanner(System.in)) {
+            scanner.useLocale(Locale.US);
 
-        if (!scanner.hasNextDouble()) {
-            System.out.printf(Locale.US, "%.3f\n", -1.000);
-            return;
+            if (!scanner.hasNextDouble()) {
+                System.out.printf(Locale.US, "%.3f\n", -1.000);
+                return;
+            }
+            double H = scanner.nextDouble();
+            double h = scanner.nextDouble();
+            double R = scanner.nextDouble();
+
+            if (R <= 0 || H <= 0 || h < 0 || H < 2 * R || h > H) {
+                System.out.printf(Locale.US, "%.3f\n", -1.000);
+                return;
+            }
+
+            double volume = 0.0;
+            double hcil = H - 2 * R;
+
+            if (h <= R) {
+                volume = (Math.PI * Math.pow(h, 2) / 3.0) * (3 * R - h);
+            } else if (h <= R + hcil) {
+                double volSemiesferaInferior = (2.0 / 3.0) * Math.PI * Math.pow(R, 3);
+                double alturaCilindroPreenchida = h - R;
+                double volCilindro = Math.PI * Math.pow(R, 2) * alturaCilindroPreenchida;
+                volume = volSemiesferaInferior + volCilindro;
+            } else {
+                double volSemiesferaInferior = (2.0 / 3.0) * Math.PI * Math.pow(R, 3);
+                double volCilindroCompleto = Math.PI * Math.pow(R, 2) * hcil;
+                double hCalotaSuperior = h - (R + hcil);
+                double volCalotaSuperior = (Math.PI * Math.pow(hCalotaSuperior, 2) / 3.0) * (3 * R - hCalotaSuperior);
+                volume = volSemiesferaInferior + volCilindroCompleto + volCalotaSuperior;
+            }
+
+            System.out.printf(Locale.US, "%.3f\n", volume);
         }
-        double H = scanner.nextDouble();
-        double h = scanner.nextDouble();
-        double R = scanner.nextDouble();
-
-        if (R <= 0 || H <= 0 || h < 0 || H < 2 * R || h > H) {
-            System.out.printf(Locale.US, "%.3f\n", -1.000);
-            return;
-        }
-
-        double volume = 0.0;
-        double hcil = H - 2 * R;
-
-        if (h <= R) {
-            volume = (Math.PI * Math.pow(h, 2) / 3.0) * (3 * R - h);
-        } else if (h <= R + hcil) {
-            double volSemiesferaInferior = (2.0 / 3.0) * Math.PI * Math.pow(R, 3);
-            double alturaCilindroPreenchida = h - R;
-            double volCilindro = Math.PI * Math.pow(R, 2) * alturaCilindroPreenchida;
-            volume = volSemiesferaInferior + volCilindro;
-        } else {
-            double volSemiesferaInferior = (2.0 / 3.0) * Math.PI * Math.pow(R, 3);
-            double volCilindroCompleto = Math.PI * Math.pow(R, 2) * hcil;
-            double hCalotaSuperior = h - (R + hcil);
-            double volCalotaSuperior = (Math.PI * Math.pow(hCalotaSuperior, 2) / 3.0) * (3 * R - hCalotaSuperior);
-            volume = volSemiesferaInferior + volCilindroCompleto + volCalotaSuperior;
-        }
-
-        System.out.printf(Locale.US, "%.3f\n", volume);
-
-        scanner.close();
     }
 }
