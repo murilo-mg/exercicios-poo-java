@@ -1,3 +1,7 @@
+/**
+ * Exercício 4: Classe Executável SessaoJediMain
+ * Teste das classes de domínio criadas (IniciadoJedi, TreinadorJedi, SessaoJedi).
+ */
 public class SessaoJediMain {
     public static void main(String[] args) {
         TreinadorJedi treinador = new TreinadorJedi("Grão-Mestre", "Fae Coven");
