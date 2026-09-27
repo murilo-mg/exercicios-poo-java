@@ -1,5 +1,10 @@
 import java.util.ArrayList;
 
+/**
+ * Exercício 4: Classe Ensalamento
+ * Gerencia salas, turmas e suas alocações, considerando capacidade,
+ * acessibilidade e conflitos de horário, além de gerar relatórios.
+ */
 public class Ensalamento {
     public ArrayList<Sala> salas;
     public ArrayList<Turma> turmas;
@@ -84,7 +89,15 @@ public class Ensalamento {
     }
 
     public int getTotalTurmasAlocadas() {
-        return ensalamento.size();
+        int total = 0;
+
+        for (TurmaEmSala item : ensalamento) {
+            if (item.sala != null) {
+                total++;
+            }
+        }
+
+        return total;
     }
 
     public int getTotalEspacoLivre() {

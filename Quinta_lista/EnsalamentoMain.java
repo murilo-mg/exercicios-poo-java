@@ -1,3 +1,8 @@
+/**
+ * Exercício 5: Classe EnsalamentoMain
+ * Testa as classes do sistema criando salas e turmas,
+ * realizando o ensalamento e exibindo os relatórios.
+ */
 public class EnsalamentoMain {
     public static void main(String[] args) {
         Ensalamento e = new Ensalamento();

@@ -1,5 +1,10 @@
 import java.util.ArrayList;
 
+/**
+ * Exercício 2: Classe Turma
+ * Representa uma turma com professor, número de alunos, acessibilidade e horários.
+ * Permite adicionar horários e gerar descrições formatadas da turma.
+ */
 public class Turma {
     public String nome;
     public String professor;
@@ -8,7 +13,7 @@ public class Turma {
     public ArrayList<Integer> horarios;
 
     public Turma() {
-        horarios = new ArrayList<Integer>();
+        this("", "", 0, false);
     }
 
     public Turma(String nome, String professor, int numAlunos, boolean acessivel) {
